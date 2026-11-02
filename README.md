@@ -2,23 +2,25 @@
 
 <table width="100%">
 <tr>
-<td align="center"><a href="https://github.com/hydraponique/roscomvpn-geoip"><b>🌎 RoscomVPN GeoIP</b></a></td>
+<td align="center"><a href="https://github.com/hurmame/geoip"><b>🌎 Hurma GeoIP</b></a></td>
 <td align="center"><a href="https://github.com/hydraponique/roscomvpn-geosite">RoscomVPN Geosite</a></td>
 <td align="center"><a href="https://github.com/hydraponique/roscomvpn-routing">RoscomVPN Routing</a></td>
 </tr>
 <tr>
-<td align="center"><img src="https://img.shields.io/github/downloads/hydraponique/roscomvpn-geoip/total.svg" alt="Downloads"> <img src="https://data.jsdelivr.com/v1/package/gh/hydraponique/roscomvpn-geoip/badge" alt="jsDelivr"></td>
+<td align="center"><img src="https://img.shields.io/github/downloads/hurmame/geoip/total.svg" alt="Downloads"> <img src="https://data.jsdelivr.com/v1/package/gh/hurmame/geoip/badge" alt="jsDelivr"></td>
 <td align="center"><img src="https://img.shields.io/github/downloads/hydraponique/roscomvpn-geosite/total.svg" alt="Downloads"> <img src="https://data.jsdelivr.com/v1/package/gh/hydraponique/roscomvpn-geosite/badge" alt="jsDelivr"></td>
 <td align="center"><img src="https://img.shields.io/github/stars/hydraponique/roscomvpn-routing.svg" alt="Stars"> <img src="https://img.shields.io/badge/Happ-blue.svg" alt="Happ"> <img src="https://img.shields.io/badge/Mihomo-grey.svg" alt="Mihomo"> <img src="https://img.shields.io/badge/Incy-darkgreen.svg" alt="Incy"></td>
 </tr>
 </table>
 
-# 🌎 RoscomVPN GeoIP
+# 🌎 Hurma GeoIP
 
 **Генерирует актуальный `geoip.dat` и рулсеты для Mihomo/sing-box**
 **с "хирургической" фильтрацией всех нужных CIDR РФ/РБ**
 
-Три категории: `direct` · `whitelist` · `private`
+Форк [hydraponique/roscomvpn-geoip](https://github.com/hydraponique/roscomvpn-geoip).
+
+Четыре категории: `ru` · `direct` · `whitelist` · `private`
 
 </div>
 
@@ -32,8 +34,8 @@
 <table width="100%">
 <thead><tr><th align="left">Источник</th><th align="left">Ссылка</th></tr></thead>
 <tbody>
-<tr><td>🔗 GitHub Releases</td><td><a href="https://github.com/hydraponique/roscomvpn-geoip/releases/latest/download/geoip.dat">https://github.com/hydraponique/roscomvpn-geoip/releases/latest/download/geoip.dat</a></td></tr>
-<tr><td>⚡ jsDelivr CDN</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/geoip.dat">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/geoip.dat</a></td></tr>
+<tr><td>🔗 GitHub Releases</td><td><a href="https://github.com/hurmame/geoip/releases/latest/download/geoip.dat">https://github.com/hurmame/geoip/releases/latest/download/geoip.dat</a></td></tr>
+<tr><td>⚡ jsDelivr CDN</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/geoip.dat">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/geoip.dat</a></td></tr>
 </tbody>
 </table>
 
@@ -45,9 +47,10 @@
 <table width="100%">
 <thead><tr><th align="left">Файл</th><th align="left">Описание</th></tr></thead>
 <tbody>
-<tr><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/text/direct.txt">release/text/direct.txt</a></td><td>~15 000+ CIDR для прямой маршрутизации</td></tr>
-<tr><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/text/whitelist.txt">release/text/whitelist.txt</a></td><td>~4 000+ CIDR белого списка, обязательная категория</td></tr>
-<tr><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/text/private.txt">release/text/private.txt</a></td><td>Приватные адреса</td></tr>
+<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/ru.txt">release/text/ru.txt</a></td><td>GeoLite2 RU/BY, категория geoip:ru</td></tr>
+<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/direct.txt">release/text/direct.txt</a></td><td>CIDR для прямой маршрутизации с исключениями</td></tr>
+<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/whitelist.txt">release/text/whitelist.txt</a></td><td>CIDR белого списка</td></tr>
+<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/private.txt">release/text/private.txt</a></td><td>Приватные адреса</td></tr>
 </tbody>
 </table>
 
@@ -59,9 +62,10 @@
 <table width="100%">
 <thead><tr><th align="left">Файл</th><th align="left">CDN</th></tr></thead>
 <tbody>
-<tr><td>direct.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/direct.mrs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/direct.mrs</a></td></tr>
-<tr><td>whitelist.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/whitelist.mrs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/whitelist.mrs</a></td></tr>
-<tr><td>private.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/private.mrs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/mihomo/private.mrs</a></td></tr>
+<tr><td>ru.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/ru.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/ru.mrs</a></td></tr>
+<tr><td>direct.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/direct.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/direct.mrs</a></td></tr>
+<tr><td>whitelist.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/whitelist.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/whitelist.mrs</a></td></tr>
+<tr><td>private.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/private.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/private.mrs</a></td></tr>
 </tbody>
 </table>
 
@@ -73,9 +77,10 @@
 <table width="100%">
 <thead><tr><th align="left">Файл</th><th align="left">CDN</th></tr></thead>
 <tbody>
-<tr><td>direct.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/direct.srs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/direct.srs</a></td></tr>
-<tr><td>whitelist.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/whitelist.srs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/whitelist.srs</a></td></tr>
-<tr><td>private.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/private.srs">https://cdn.jsdelivr.net/gh/hydraponique/roscomvpn-geoip/release/sing-box/private.srs</a></td></tr>
+<tr><td>ru.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/ru.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/ru.srs</a></td></tr>
+<tr><td>direct.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/direct.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/direct.srs</a></td></tr>
+<tr><td>whitelist.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/whitelist.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/whitelist.srs</a></td></tr>
+<tr><td>private.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/private.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/private.srs</a></td></tr>
 </tbody>
 </table>
 
@@ -83,11 +88,15 @@
 
 ---
 
+## 🧬 Из чего состоит `geoip:ru`
+
+GeoLite2 RU/BY (IPv4), без исключений из категории `direct`.
+
 ## 🧬 Из чего состоит `geoip:direct`
 
 > [!TIP]
 > **Добавлено (ADD):**
-> - GeoLite2 + IPinfo + DB-IP — три независимые геобазы всех RU/BY CIDR-диапазонов (IPv4)
+> - IPinfo + DB-IP — две независимые геобазы RU/BY CIDR-диапазонов (IPv4)
 > - Кастомный список CIDR — VK Company/Mail.Ru, Yandex, CDNVideo (Билайн), включая зарубежные активы
 > - Apple Push Notifications — решение проблем с доставкой пушей на iOS
 
@@ -113,7 +122,7 @@
     "rules": [
       {
         "type": "field",
-        "ip": ["geoip:direct"],
+        "ip": ["geoip:ru"],
         "outboundTag": "direct"
       }
     ]
