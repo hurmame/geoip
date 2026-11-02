@@ -28,10 +28,10 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Checkout v2fly/geoip
+      - name: Checkout Loyalsoldier/geoip
         uses: actions/checkout@v6
         with:
-          repository: v2fly/geoip
+          repository: Loyalsoldier/geoip
           path: geoip
           fetch-depth: 1
 
@@ -59,7 +59,7 @@ jobs:
 
       - name: Create Tag
         if: github.ref_name == 'master'
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9
         with:
           script: |
             const { DAILY_TAG } = process.env
@@ -79,7 +79,7 @@ jobs:
           ${{ env.CURL }} -o refilter.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/ipsum.lst
           ${{ env.CURL }} -o refiltercommunity.txt https://raw.githubusercontent.com/1andrevich/Re-filter-lists/refs/heads/main/community_ips.lst
           ${{ env.CURL }} -o antifilternetwork.txt https://antifilter.network/download/ip.lst
-          ${{ env.CURL }} -o antifilternetworkcommunity.txt https://antifilter.network/downloads/custom.lst
+          #${{ env.CURL }} -o antifilternetworkcommunity.txt https://antifilter.network/downloads/custom.lst
           ${{ env.CURL }} -o cdn.lst https://raw.githubusercontent.com/mansourjabin/cdn-ip-database/refs/heads/main/data/cdn.lst
           ${{ env.CURL }} -o merged.sum https://raw.githubusercontent.com/PentiumB/CDN-RuleSet/refs/heads/main/release/merged.sum
           ${{ env.CURL }} -o geolite_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/geolite2-geo-whois-asn-country-ipv4/ru.lst
@@ -88,6 +88,9 @@ jobs:
           ${{ env.CURL }} -o ipinfo_by.lst https://raw.githubusercontent.com/Davoyan/ipinfo/refs/heads/main/geo/geoip/by.lst
           ${{ env.CURL }} -o dbip_ru.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/ru.lst
           ${{ env.CURL }} -o dbip_by.lst https://raw.githubusercontent.com/hydraponique/countrydb/refs/heads/main/output/dbip-country-ipv4/by.lst
+          ${{ env.CURL }} -o /tmp/GeoLite2-ASN-CSV.zip https://dl.netsyms.net/dbs/geolite2/GeoLite2-ASN-CSV.zip
+          unzip -j /tmp/GeoLite2-ASN-CSV.zip '*/GeoLite2-ASN-Blocks-*.csv' -d ./geolite2
+          ls -l ./geolite2/
 
       - name: Build geoip tool
         working-directory: geoip
@@ -101,117 +104,8 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf output
-          ./geoip -c config.json
+          ./geoip convert -c config.json
           ls -l output/dat/*.dat
-
-      - name: Install Mihomo (latest stable .deb)
-        run: |
-          set -euo pipefail
-          ARCH=$(dpkg --print-architecture)
-          LATEST_URL=$(${{ env.CURL }} https://api.github.com/repos/MetaCubeX/mihomo/releases/latest \
-            | grep -oP '"browser_download_url":\s*"\K[^"]*mihomo-linux-'"$ARCH"'-[^"]*\.deb(?=")' \
-            | head -n1)
-          echo "Downloading: $LATEST_URL"
-          ${{ env.CURL }} -o /tmp/mihomo.deb "$LATEST_URL"
-          sudo dpkg -i /tmp/mihomo.deb || sudo apt-get install -f -y
-          rm -f /tmp/mihomo.deb
-
-      - name: Install sing-box
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          ${{ env.CURL }} https://sing-box.app/install.sh | sudo -E sh -s -- --version 1.12.12
-
-      - name: Prepare workdir (copy ALL text files + clean with awk)
-        run: |
-          set -euo pipefail
-
-          work=/tmp/geoip-text
-          rm -rf "$work"
-          mkdir -p "$work"
-
-          shopt -s nullglob
-          cp -f geoip/output/text/*.txt "$work"/
-          shopt -u nullglob
-
-          for f in "$work"/*.txt; do
-            tmp="$(mktemp)"
-            awk '
-              function trim(s){ sub(/^[ \t]+/,"",s); sub(/[ \t]+$/,"",s); return s }
-              {
-                gsub(/\r/,"")
-                s=$0
-
-                sub(/[ \t]*#.*/,  "", s)
-                sub(/[ \t]*\/\/.*/, "", s)
-                sub(/[ \t]*@.*/,  "", s)
-
-                s=trim(s)
-                if (s=="") next
-                print s
-              }
-            ' "$f" > "$tmp"
-            mv "$tmp" "$f"
-          done
-
-      - name: Build mihomo .mrs from workdir (multi-file)
-        run: |
-          set -euo pipefail
-
-          src=/tmp/geoip-text
-          out=/tmp/mihomo/rulesets
-          rm -rf /tmp/mihomo
-          mkdir -p "$out"
-
-          shopt -s nullglob
-          for f in "$src"/*.txt; do
-            bn="$(basename "$f")"
-            base="${bn%.txt}"
-            dest="$out/${base}.mrs"
-            mihomo convert-ruleset ipcidr text "$f" "$dest"
-          done
-          shopt -u nullglob
-
-          ls -l "$out"/*.mrs
-
-      - name: Build sing-box .srs from workdir (multi-file, no python/jq)
-        run: |
-          set -euo pipefail
-
-          src=/tmp/geoip-text
-          out=/tmp/sing-box/rulesets
-          rm -rf /tmp/sing-box
-          mkdir -p "$out"
-
-          shopt -s nullglob
-          for f in "$src"/*.txt; do
-            bn="$(basename "$f")"
-            base="${bn%.txt}"
-            dest="$out/${base}.srs"
-
-            tmp_json="$(mktemp)"
-
-            if test -s "$f"; then
-              awk '
-                BEGIN { first=1; printf("{\"version\":3,\"rules\":[{\"ip_cidr\":[") }
-                {
-                  if (first==0) printf(",")
-                  printf("\"%s\"", $0)
-                  first=0
-                }
-                END { printf("]}]}") }
-              ' "$f" > "$tmp_json"
-            else
-              printf '{"version":3,"rules":[]}' > "$tmp_json"
-            fi
-
-            sing-box rule-set compile --output "$dest" "$tmp_json"
-            rm -f "$tmp_json"
-          done
-          shopt -u nullglob
-
-          ls -l "$out"/*.srs
 
       - name: MASTER Prepare release directory and archives
         if: github.ref_name == 'master'
@@ -220,9 +114,9 @@ jobs:
           rm -rf release
           mkdir -p release/text release/mihomo release/sing-box
           cp geoip/output/dat/*.dat release/
-          cp -f /tmp/geoip-text/*.txt release/text/
-          cp -a /tmp/mihomo/rulesets/.   release/mihomo/
-          cp -a /tmp/sing-box/rulesets/. release/sing-box/
+          cp -f geoip/output/text/*.txt release/text/
+          cp -f geoip/output/mrs/*.mrs   release/mihomo/
+          cp -f geoip/output/srs/*.srs   release/sing-box/
           rm -f /tmp/text.tar.gz /tmp/mihomo.tar.gz /tmp/sing-box.tar.gz
           tar -czf /tmp/text.tar.gz     -C release text
           tar -czf /tmp/mihomo.tar.gz   -C release mihomo
@@ -254,7 +148,7 @@ jobs:
 
       - name: MASTER Publish GitHub Release
         if: github.ref_name == 'master'
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ env.DAILY_TAG }}
           name: ${{ env.DAILY_TAG }}
@@ -287,9 +181,9 @@ jobs:
           rm -rf release
           mkdir -p release/text release/mihomo release/sing-box
           cp geoip/output/dat/*.dat release/
-          cp -f /tmp/geoip-text/*.txt release/text/
-          cp -a /tmp/mihomo/rulesets/.   release/mihomo/
-          cp -a /tmp/sing-box/rulesets/. release/sing-box/
+          cp -f geoip/output/text/*.txt release/text/
+          cp -f geoip/output/mrs/*.mrs   release/mihomo/
+          cp -f geoip/output/srs/*.srs   release/sing-box/
           sha256sum release/geoip.dat > release/geoip.dat.sha256
 
       - name: TEST Push to test-release branch & update test branch
@@ -322,4 +216,3 @@ jobs:
             ${{ env.CURL }} -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@test/release/${rel}"
             ${{ env.CURL }} -i "https://purge.jsdelivr.net/gh/${{ github.repository }}@test-release/${rel}"
           done
-          

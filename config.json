@@ -22,7 +22,7 @@
       "type": "text",
       "action": "add",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./ipinfo_ru.lst",
         "onlyIPType": "ipv4"
       }
@@ -31,7 +31,7 @@
       "type": "text",
       "action": "add",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./ipinfo_by.lst",
         "onlyIPType": "ipv4"
       }
@@ -40,7 +40,7 @@
       "type": "text",
       "action": "add",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./dbip_ru.lst",
         "onlyIPType": "ipv4"
       }
@@ -49,16 +49,108 @@
       "type": "text",
       "action": "add",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./dbip_by.lst",
         "onlyIPType": "ipv4"
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "add",
+      "args": {
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS47764",
+            "AS199295",
+            "AS207970",
+            "AS21051",
+            "AS47542",
+            "AS60863",
+            "AS47541",
+            "AS62243",
+            "AS49988",
+            "AS57973",
+            "AS207581",
+            "AS213235",
+            "AS28709",
+            "AS201817",
+            "AS49797",
+            "AS60476",
+            "AS211963",
+            "AS61178",
+            "AS205830"
+          ]
+        }
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "add",
+      "args": {
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS13238",
+            "AS44534",
+            "AS207304",
+            "AS210656",
+            "AS202611",
+            "AS207207",
+            "AS200350",
+            "AS215013",
+            "AS208398",
+            "AS212066",
+            "AS215024",
+            "AS208795",
+            "AS210560",
+            "AS214415",
+            "AS211318",
+            "AS213291",
+            "AS401712",
+            "AS200632",
+            "AS53428",
+            "AS49714",
+            "AS215109",
+            "AS213952"
+          ]
+        }
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "add",
+      "args": {
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS57363",
+            "AS204720"
+          ]
+        }
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "add",
+      "args": {
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS206980"
+          ]
+        }
       }
     },
     {
       "type": "text",
       "action": "add",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./CUSTOM-LIST-ADD.txt"
       }
     },
@@ -66,7 +158,7 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./refilter.txt",
         "onlyIPType": "ipv4"
       }
@@ -75,7 +167,7 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./antifilternetwork.txt",
         "onlyIPType": "ipv4"
       }
@@ -84,7 +176,7 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./antifilterdownloadcommunity.txt",
         "onlyIPType": "ipv4"
       }
@@ -93,7 +185,7 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./refiltercommunity.txt",
         "onlyIPType": "ipv4"
       }
@@ -102,16 +194,7 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
-        "uri": "./antifilternetworkcommunity.txt",
-        "onlyIPType": "ipv4"
-      }
-    },
-    {
-      "type": "text",
-      "action": "remove",
-      "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./cdn.lst",
         "onlyIPType": "ipv4"
       }
@@ -120,17 +203,39 @@
       "type": "text",
       "action": "remove",
       "args": {
-        "name": "direct",
+        "name": "ru",
         "uri": "./merged.sum",
         "onlyIPType": "ipv4"
       }
     },
     {
-      "type": "text",
+      "type": "maxmindGeoLite2ASNCSV",
       "action": "remove",
       "args": {
-        "name": "direct",
-        "uri": "./CUSTOM-LIST-DEL.txt"
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS24940",
+            "AS212317",
+            "AS213230",
+            "AS215859"
+          ]
+        }
+      }
+    },
+    {
+      "type": "maxmindGeoLite2ASNCSV",
+      "action": "remove",
+      "args": {
+        "ipv4": "./geolite2/GeoLite2-ASN-Blocks-IPv4.csv",
+        "ipv6": "./geolite2/GeoLite2-ASN-Blocks-IPv6.csv",
+        "wantedList": {
+          "ru": [
+            "AS48158",
+            "AS47328"
+          ]
+        }
       }
     },
     {
@@ -159,7 +264,19 @@
       "action": "remove",
       "args": {
         "name": "private",
-        "ipOrCIDR": ["0.0.0.0/8", "::/128"]
+        "ipOrCIDR": [
+          "0.0.0.0/8",
+          "::/128"
+        ]
+      }
+    },
+    {
+      "type": "text",
+      "action": "add",
+      "args": {
+        "name": "ru",
+        "uri": "./CUSTOM-FIX-ADD.txt",
+        "onlyIPType": "ipv4"
       }
     }
   ],
@@ -173,6 +290,14 @@
     },
     {
       "type": "text",
+      "action": "output"
+    },
+    {
+      "type": "mihomoMRS",
+      "action": "output"
+    },
+    {
+      "type": "singboxSRS",
       "action": "output"
     }
   ]

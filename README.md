@@ -20,7 +20,7 @@
 
 Форк [hydraponique/roscomvpn-geoip](https://github.com/hydraponique/roscomvpn-geoip).
 
-Четыре категории: `ru` · `direct` · `whitelist` · `private`
+Три категории: `ru` · `whitelist` · `private`. Итоговый список upstream `direct` целиком переименован в `ru` для существующих клиентских правил.
 
 </div>
 
@@ -47,8 +47,7 @@
 <table width="100%">
 <thead><tr><th align="left">Файл</th><th align="left">Описание</th></tr></thead>
 <tbody>
-<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/ru.txt">release/text/ru.txt</a></td><td>GeoLite2 RU/BY, категория geoip:ru</td></tr>
-<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/direct.txt">release/text/direct.txt</a></td><td>CIDR для прямой маршрутизации с исключениями</td></tr>
+<tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/ru.txt">release/text/ru.txt</a></td><td>Итоговый список upstream direct, категория geoip:ru</td></tr>
 <tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/whitelist.txt">release/text/whitelist.txt</a></td><td>CIDR белого списка</td></tr>
 <tr><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/text/private.txt">release/text/private.txt</a></td><td>Приватные адреса</td></tr>
 </tbody>
@@ -63,7 +62,6 @@
 <thead><tr><th align="left">Файл</th><th align="left">CDN</th></tr></thead>
 <tbody>
 <tr><td>ru.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/ru.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/ru.mrs</a></td></tr>
-<tr><td>direct.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/direct.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/direct.mrs</a></td></tr>
 <tr><td>whitelist.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/whitelist.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/whitelist.mrs</a></td></tr>
 <tr><td>private.mrs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/private.mrs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/mihomo/private.mrs</a></td></tr>
 </tbody>
@@ -78,7 +76,6 @@
 <thead><tr><th align="left">Файл</th><th align="left">CDN</th></tr></thead>
 <tbody>
 <tr><td>ru.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/ru.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/ru.srs</a></td></tr>
-<tr><td>direct.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/direct.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/direct.srs</a></td></tr>
 <tr><td>whitelist.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/whitelist.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/whitelist.srs</a></td></tr>
 <tr><td>private.srs</td><td><a href="https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/private.srs">https://cdn.jsdelivr.net/gh/hurmame/geoip@release/sing-box/private.srs</a></td></tr>
 </tbody>
@@ -90,13 +87,11 @@
 
 ## 🧬 Из чего состоит `geoip:ru`
 
-GeoLite2 RU/BY (IPv4), без исключений из категории `direct`.
-
-## 🧬 Из чего состоит `geoip:direct`
+Все источники, добавления и исключения upstream `direct`, включая ASN-списки и финальные исправления, применяются к `ru`.
 
 > [!TIP]
 > **Добавлено (ADD):**
-> - IPinfo + DB-IP — две независимые геобазы RU/BY CIDR-диапазонов (IPv4)
+> - GeoLite2 + IPinfo + DB-IP — три независимые геобазы RU/BY CIDR-диапазонов (IPv4)
 > - Кастомный список CIDR — VK Company/Mail.Ru, Yandex, CDNVideo (Билайн), включая зарубежные активы
 > - Apple Push Notifications — решение проблем с доставкой пушей на iOS
 
